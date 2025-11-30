@@ -1,0 +1,43 @@
+@startuml PrimerUMLP1.puml
+
+abstract class Producto {
+    +nombre: String
+    +precio: double
+    +calcularPrecioFinal(): double
+    +toString(): String
+}
+
+class ProductoFisico {
+    +costeEnvio: double
+    +calcularPrecioFinal(): double
+}
+
+class ProductoDigital {
+    +tamanoDescarga: double
+    +calcularPrecioFinal(): double
+}
+
+Producto <|-- ProductoFisico
+Producto <|-- ProductoDigital
+
+class Cliente {
+    +nombre: String
+    +correo: String
+    +direccion: String
+    +getNombre(): String
+    +getCorreo(): String
+    +getDireccion(): String
+}
+
+class Pedido {
+    +productos: List<Producto>
+    +cliente: Cliente
+    +agregarProducto(p: Producto): void
+    +calcularTotal(): double
+    +mostrarResumen(): String
+}
+
+Pedido --> Cliente : "asocia"
+Pedido o-- Producto : "contiene"
+
+@enduml

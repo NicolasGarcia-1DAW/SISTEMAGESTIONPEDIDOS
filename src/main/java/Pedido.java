@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,9 @@ public class Pedido {
     }
 
     public double calcularTotal() {
+        if(productos.isEmpty()){
+        throw new IllegalStateException("El pedido no tiene productos");
+    }
         double total = 0;
         for (Producto producto : productos) {
             total += producto.calcularPrecioFinal();

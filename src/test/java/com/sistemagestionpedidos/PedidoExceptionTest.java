@@ -10,9 +10,9 @@ public class PedidoExceptionTest {
     @Test
     void calcularTotalPedidoSinProductos() {
 
-        Cliente cliente = new Cliente("Juan", "juan@email.com", "Calle 1");
+        Cliente cliente = new Cliente("JR-1", "Juan Rodriguez", 3, true, "España");
 
-        Pedido pedido = new Pedido(cliente);
+        Pedido pedido = new Pedido("P1|JR-1", cliente);
 
         Exception exception = assertThrows(IllegalStateException.class, () -> {
             pedido.calcularTotal();

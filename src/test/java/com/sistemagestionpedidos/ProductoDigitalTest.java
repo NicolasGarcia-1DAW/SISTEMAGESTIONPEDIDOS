@@ -10,12 +10,12 @@ public class ProductoDigitalTest {
     @Test
     void calcularPrecioFinalProductoDigital() {
 
-        ProductoDigital producto = new ProductoDigital("Videojuego", 40.0, 500);
+        ProductoDigital producto = new ProductoDigital("2","Curso", 30.0, 500);
 
         double resultado = producto.calcularPrecioFinal();
 
-        assertEquals(40.0, resultado);
-        assertTrue(resultado == 40.0);
+        assertEquals(36.3, resultado, 0.01);
+        assertTrue(resultado > 30);
         assertNotEquals(50.0, resultado);
     }
 }

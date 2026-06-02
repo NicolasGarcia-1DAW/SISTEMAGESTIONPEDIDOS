@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.sistemagestionpedidos.GestionPedidosIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.sistemagestionpedidos.GestionPedidosIntegrationTest
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.050 s <<< FAILURE! -- in com.sistemagestionpedidos.GestionPedidosIntegrationTest
+com.sistemagestionpedidos.GestionPedidosIntegrationTest.deberiaCalcularTotalCorrectamente -- Time elapsed: 0.028 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <85.0> but was: <86.3>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:201)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:72)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:67)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:924)
+	at com.sistemagestionpedidos.GestionPedidosIntegrationTest.deberiaCalcularTotalCorrectamente(GestionPedidosIntegrationTest.java:23)
+

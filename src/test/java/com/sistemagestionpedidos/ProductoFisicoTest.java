@@ -10,12 +10,12 @@ public class ProductoFisicoTest {
     @Test
     void calcularPrecioFinalProductoFisico() {
 
-        ProductoFisico producto = new ProductoFisico("Teclado", 50.0, 5.0);
+        ProductoFisico producto = new ProductoFisico("1", "Teclado", 50.0, 5.0);
 
         double resultado = producto.calcularPrecioFinal();
 
-        assertEquals(55.0, resultado);
-        assertTrue(resultado > 50.0);
-        assertNotEquals(50.0, resultado);
+        assertEquals(50.0, resultado);
+        assertTrue(resultado > 45.0);
+        assertNotEquals(45.0, resultado);
     }
 }

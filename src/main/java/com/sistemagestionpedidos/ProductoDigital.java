@@ -1,14 +1,16 @@
 package com.sistemagestionpedidos;
 
 public class ProductoDigital extends Producto {
+
     private double tamanoDescarga;
 
-    public ProductoDigital(String nombre, double precio, double tamanoDescarga) {
-        super(nombre, precio);
+    public ProductoDigital(String id, String nombre, double precioBase, double tamanoDescarga) {
+        super(id, nombre, precioBase);
 
         if (tamanoDescarga < 0) {
             throw new IllegalArgumentException("El tamaño de descarga no puede ser negativo");
         }
+
         this.tamanoDescarga = tamanoDescarga;
     }
 
@@ -20,13 +22,35 @@ public class ProductoDigital extends Producto {
         this.tamanoDescarga = tamanoDescarga;
     }
 
+    public double aplicarIVA(String tipoIva) {
+
+        switch (tipoIva.toUpperCase()) {
+
+            case "GENERAL":
+                return getPrecioBase() * 1.21;
+
+            case "REDUCIDO":
+                return getPrecioBase() * 1.10;
+
+            case "SUPER":
+                return getPrecioBase() * 1.04;
+
+            default:
+                throw new IllegalArgumentException("Tipo de IVA no válido");
+        }
+    }
+
     @Override
     public double calcularPrecioFinal() {
-        return getPrecio();
+        return aplicarIVA("GENERAL");
     }
 
     @Override
     public String toString() {
-        return "Digital --> " + super.toString() + ", Tamaño de Descarga: " + tamanoDescarga + "MB";
+        return "Digital --> "
+                + super.toString()
+                + ", Tamaño de Descarga: "
+                + tamanoDescarga
+                + " MB";
     }
 }

@@ -1,16 +1,28 @@
 package com.sistemagestionpedidos;
 
 public abstract class Producto {
-    private String nombre;
-    private double precio;
 
-    public Producto(String nombre, double precio) {
+    private String id;
+    private String nombre;
+    private double precioBase;
+
+    public Producto(String id, String nombre, double precioBase) {
+
+        if (precioBase < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
         
-        if(precio < 0){
-        throw new IllegalArgumentException("El precio no puede ser negativo");
-    }
+        this.id = id;
         this.nombre = nombre;
-        this.precio = precio;
+        this.precioBase = precioBase;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -21,18 +33,20 @@ public abstract class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getPrecioBase() {
+        return precioBase;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecioBase(double precioBase) {
+        this.precioBase = precioBase;
     }
 
     public abstract double calcularPrecioFinal();
 
     @Override
     public String toString() {
-        return "Producto: " + nombre + ", Precio: " + precio;
+        return "Producto [id=" + id +
+               ", nombre=" + nombre +
+               ", precioBase=" + precioBase + "]";
     }
 }

@@ -72,4 +72,21 @@ public class Cliente {
     public void setPais(String pais) {
         this.pais = pais;
     }
+
+    public double calcularDescuentoFidelidad() {
+
+        double descuento = 0;
+
+        if (esVip) {
+            descuento += 0.10; // 10%
+        }
+
+        if (anosAntiguedad >= 5) {
+            descuento += 0.05; // 5%
+        } else if (anosAntiguedad >= 2) {
+            descuento += 0.02; // 2%
+        }
+
+        return descuento;
+    }
 }

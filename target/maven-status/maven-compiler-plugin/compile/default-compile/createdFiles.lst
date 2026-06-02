@@ -1,0 +1,9 @@
+com\sistemagestionpedidos\Cliente.class
+com\sistemagestionpedidos\ServicioFacturacion.class
+com\sistemagestionpedidos\ProductoDigital.class
+com\sistemagestionpedidos\Pedido.class
+com\sistemagestionpedidos\Main.class
+com\sistemagestionpedidos\GestorInventario.class
+com\sistemagestionpedidos\ProductoFisico.class
+com\sistemagestionpedidos\CalculadoraFinanciera.class
+com\sistemagestionpedidos\Producto.class

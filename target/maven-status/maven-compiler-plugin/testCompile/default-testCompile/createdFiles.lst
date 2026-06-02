@@ -1,0 +1,8 @@
+com\sistemagestionpedidos\ProductoFisicoExceptionTest.class
+com\sistemagestionpedidos\PedidoExceptionTest.class
+com\sistemagestionpedidos\ProductoExceptionTest.class
+com\sistemagestionpedidos\PedidoTest.class
+com\sistemagestionpedidos\GestionPedidosIntegrationTest.class
+com\sistemagestionpedidos\ProductoDigitalExceptionTest.class
+com\sistemagestionpedidos\ProductoDigitalTest.class
+com\sistemagestionpedidos\ProductoFisicoTest.class

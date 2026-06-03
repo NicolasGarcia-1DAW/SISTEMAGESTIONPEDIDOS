@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Tests de Integracion")
-public class GestionPedidosIntegrationTest {
+public class PedidoProductoIntegrationTest {
 
     @Test
     @DisplayName("Calculo correcto de total con productos fisicos y digitales")

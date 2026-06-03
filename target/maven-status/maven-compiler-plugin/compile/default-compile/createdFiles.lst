@@ -1,9 +1,11 @@
+com\sistemagestionpedidos\Factura.class
 com\sistemagestionpedidos\Cliente.class
-com\sistemagestionpedidos\ServicioFacturacion.class
 com\sistemagestionpedidos\ProductoDigital.class
 com\sistemagestionpedidos\Pedido.class
 com\sistemagestionpedidos\Main.class
-com\sistemagestionpedidos\GestorInventario.class
 com\sistemagestionpedidos\ProductoFisico.class
-com\sistemagestionpedidos\CalculadoraFinanciera.class
+com\sistemagestionpedidos\excluidosonar\ServicioFacturacion.class
+com\sistemagestionpedidos\Tienda.class
+com\sistemagestionpedidos\excluidosonar\CalculadoraFinanciera.class
+com\sistemagestionpedidos\excluidosonar\GestorInventario.class
 com\sistemagestionpedidos\Producto.class

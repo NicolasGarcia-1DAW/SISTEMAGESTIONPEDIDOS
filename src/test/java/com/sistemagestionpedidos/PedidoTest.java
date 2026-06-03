@@ -4,28 +4,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+/*
+ * Protege el cálculo del total del pedido para combinaciones
+ * de productos físicos y digitales con distintos importes.
+ */
 public class PedidoTest {
 
     @ParameterizedTest
     @CsvSource({
-            "50,5,30,85",
-            "20,3,10,33",
-            "100,10,50,160"
+            "50,5,30,86.3",
+            "20,5,10,32.1",
+            "100,5,50,160.5"
     })
-    void calcularTotalPedido(double precioProducto1, double envio, double precioProducto2, double totalEsperado) {
+    void calcularTotalPedido(double precioFisico, double peso, double precioDigital, double totalEsperado) {
 
-        Cliente cliente = new Cliente("Juan", "juan@email.com", "Calle 1");
+        Cliente cliente = new Cliente(1, "Juan Rodriguez", 3, true, "España");
 
-        Pedido pedido = new Pedido(cliente);
+        Pedido pedido = new Pedido(1, cliente);
 
-        ProductoFisico p1 = new ProductoFisico("Producto1", precioProducto1, envio);
-        ProductoDigital p2 = new ProductoDigital("Producto2", precioProducto2, 200);
+        ProductoFisico p1 = new ProductoFisico(1,"Teclado", precioFisico, peso);
+        ProductoDigital p2 = new ProductoDigital(2,"Curso", precioDigital, 500);
 
-        pedido.agregarProducto(p1);
-        pedido.agregarProducto(p2);
+        pedido.agregarProducto(p1, 1);
+        pedido.agregarProducto(p2, 1);
 
         double total = pedido.calcularTotal();
 
-        assertEquals(totalEsperado, total);
+        assertEquals(totalEsperado, total, 0.01);
     }
 }

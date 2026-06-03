@@ -10,6 +10,6 @@ public class ProductoDigitalExceptionTest {
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new ProductoDigital("Curso", 50, -10));
+                () -> new ProductoDigital(2,"Curso", 30.0, -500));
     }
 }

@@ -11,7 +11,7 @@ public class ProductoExceptionTest {
 
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-            () -> new ProductoFisico("ProductoError", -10, 5)
+            () -> new ProductoFisico(1, "ProductoError", -10, 5)
         );
 
         assertEquals(
@@ -25,7 +25,7 @@ public class ProductoExceptionTest {
 
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-            () -> new ProductoDigital("ProductoError", -10, 100)
+            () -> new ProductoDigital(2, "ProductoError", -10, 100)
         );
 
         assertEquals(

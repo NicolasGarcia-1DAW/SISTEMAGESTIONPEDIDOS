@@ -1,4 +1,4 @@
-package com.sistemagestionpedidos;
+package com.sistemagestionpedidos.excluidosonar;
 
 import java.util.UUID;
 

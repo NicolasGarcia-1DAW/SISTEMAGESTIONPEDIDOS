@@ -10,11 +10,11 @@ public class PedidoExceptionTest {
     @Test
     void calcularTotalPedidoSinProductos() {
 
-        Cliente cliente = new Cliente("Juan", "juan@email.com", "Calle 1");
+        Cliente cliente = new Cliente(1, "Juan Rodriguez", 3, true, "España");
 
-        Pedido pedido = new Pedido(cliente);
+        Pedido pedido = new Pedido(1, cliente);
 
-        Exception exception = assertThrows(IllegalStateException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             pedido.calcularTotal();
         });
 

@@ -2,6 +2,7 @@ com\sistemagestionpedidos\ProductoFisicoExceptionTest.class
 com\sistemagestionpedidos\SistemaE2ETest.class
 com\sistemagestionpedidos\PedidoExceptionTest.class
 com\sistemagestionpedidos\ProductoExceptionTest.class
+com\sistemagestionpedidos\MasterGroupTest.class
 com\sistemagestionpedidos\PedidoTest.class
 com\sistemagestionpedidos\TiendaIntegrationTest.class
 com\sistemagestionpedidos\PedidoProductoIntegrationTest.class

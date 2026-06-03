@@ -2,16 +2,16 @@ package com.sistemagestionpedidos;
 
 public class Cliente {
 
-    private String id;
+    private int id;
     private String nombre;
     private int anosAntiguedad;
     private boolean esVip;
     private String pais;
 
-    public Cliente(String id, String nombre, int anosAntiguedad, boolean esVip, String pais) {
+    public Cliente(int id, String nombre, int anosAntiguedad, boolean esVip, String pais) {
 
-        if (id == null || id.isBlank()) {
-            throw new IllegalArgumentException("El id no puede estar vacio");
+        if (id <= 0) {
+            throw new IllegalArgumentException("El id debe ser mayor que cero");
         }
 
         if (nombre == null || nombre.isBlank()) {
@@ -33,11 +33,15 @@ public class Cliente {
         this.pais = pais;
     }
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("El id debe ser mayor que cero");
+        }
+
         this.id = id;
     }
 
@@ -78,13 +82,13 @@ public class Cliente {
         double descuento = 0;
 
         if (esVip) {
-            descuento += 0.10; // 10%
+            descuento += 0.10;
         }
 
         if (anosAntiguedad >= 5) {
-            descuento += 0.05; // 5%
+            descuento += 0.05;
         } else if (anosAntiguedad >= 2) {
-            descuento += 0.02; // 2%
+            descuento += 0.02;
         }
 
         return descuento;

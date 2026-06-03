@@ -1,39 +1,84 @@
 package com.sistemagestionpedidos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Pedido {
 
-    private String idPedido;
+    public static final String PRODUCT_LIST_EMPTY_EXCEPTION_MESSAGE = "El pedido no tiene productos";
+
+    private int idPedido;
     private List<Producto> productos;
+    private Map<Integer, Integer> cantidades;
     private Cliente cliente;
 
-    public Pedido(String idPedido, Cliente cliente) {
+    public Pedido(int idPedido, Cliente cliente) {
 
-        if (idPedido == null || idPedido.isBlank()) {
-            throw new IllegalArgumentException("El id del pedido no puede estar vacio");
+        if (idPedido <= 0) {
+            throw new IllegalArgumentException("El id del pedido debe ser mayor que cero");
+        }
+
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo");
         }
 
         this.idPedido = idPedido;
         this.cliente = cliente;
         this.productos = new ArrayList<>();
+        this.cantidades = new HashMap<>();
     }
 
-    public String getIdPedido() {
+    public Pedido(int idPedido, Cliente cliente, List<Producto> productos, Map<Integer, Integer> cantidades) {
+
+        if (idPedido <= 0) {
+            throw new IllegalArgumentException("El id del pedido debe ser mayor que cero");
+        }
+
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo");
+        }
+
+        if (productos == null || cantidades == null) {
+            throw new IllegalArgumentException("Productos y cantidades no pueden ser nulos");
+        }
+
+        for (Producto producto : productos) {
+
+            if (!cantidades.containsKey(producto.getId())) {
+                throw new IllegalArgumentException("Falta la cantidad de alguno de los productos");
+            }
+        }
+
+        this.idPedido = idPedido;
+        this.cliente = cliente;
+        this.productos = new ArrayList<>(productos);
+        this.cantidades = new HashMap<>(cantidades);
+    }
+
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(String idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
     public List<Producto> getProductos() {
-        return productos;
+        return new ArrayList<>(productos);
     }
 
     public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+        this.productos = new ArrayList<>(productos);
+    }
+
+    public Map<Integer, Integer> getCantidades() {
+        return new HashMap<>(cantidades);
+    }
+
+    public void setCantidades(Map<Integer, Integer> cantidades) {
+        this.cantidades = new HashMap<>(cantidades);
     }
 
     public Cliente getCliente() {
@@ -44,27 +89,80 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public void agregarProducto(Producto p) {
-        productos.add(p);
+    public void agregarProducto(Producto producto, int cantidad) {
+
+        if (producto == null) {
+            throw new IllegalArgumentException("El producto no puede ser nulo");
+        }
+
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser mayor que cero");
+        }
+
+        productos.add(producto);
+        cantidades.put(producto.getId(), cantidad);
     }
 
-    public void eliminarProducto(Producto p) {
-        productos.remove(p);
+    public void eliminarProducto(Producto producto) {
+
+        productos.remove(producto);
+        cantidades.remove(producto.getId());
     }
 
     public double calcularTotal() {
 
         if (productos.isEmpty()) {
-            throw new IllegalStateException("El pedido no tiene productos");
+            throw new IllegalStateException(PRODUCT_LIST_EMPTY_EXCEPTION_MESSAGE);
         }
 
         double total = 0;
 
         for (Producto producto : productos) {
-            total += producto.calcularPrecioFinal();
+
+            int cantidad = cantidades.get(producto.getId());
+
+            total += producto.calcularPrecioFinal() * cantidad;
         }
 
         return total;
+    }
+
+    public double calcularEnvio(String pais) {
+
+        double totalEnvio = 0;
+
+        for (Producto producto : productos) {
+
+            if (producto instanceof ProductoFisico) {
+
+                ProductoFisico pf = (ProductoFisico) producto;
+
+                int cantidad = cantidades.getOrDefault(producto.getId(), 0);
+
+                totalEnvio += pf.calcularCosteEnvio(pais) * cantidad;
+            }
+        }
+
+        return totalEnvio;
+    }
+
+    public double calcularIva(String tipoIva) {
+
+        double totalIva = 0;
+
+        for (Producto producto : productos) {
+
+            if (producto instanceof ProductoDigital) {
+
+                ProductoDigital pd = (ProductoDigital) producto;
+
+                int cantidad = cantidades.get(producto.getId());
+
+                totalIva += (pd.aplicarIVA(tipoIva) - pd.getPrecioBase()) * cantidad;
+            }
+        }
+
+        return totalIva;
     }
 
     public String mostrarResumen() {
@@ -78,7 +176,11 @@ public class Pedido {
         resumen += "Productos:\n";
 
         for (Producto producto : productos) {
-            resumen += producto.toString() + "\n";
+
+            resumen += producto.toString()
+                    + " | Cantidad: "
+                    + cantidades.get(producto.getId())
+                    + "\n";
         }
 
         resumen += "Total: " + calcularTotal() + " euros\n";

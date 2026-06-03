@@ -4,7 +4,7 @@ public class ProductoDigital extends Producto {
 
     private double tamanoDescarga;
 
-    public ProductoDigital(String id, String nombre, double precioBase, double tamanoDescarga) {
+    public ProductoDigital(int id, String nombre, double precioBase, double tamanoDescarga) {
         super(id, nombre, precioBase);
 
         if (tamanoDescarga < 0) {
@@ -19,6 +19,11 @@ public class ProductoDigital extends Producto {
     }
 
     public void setTamanoDescarga(double tamanoDescarga) {
+
+        if (tamanoDescarga < 0) {
+            throw new IllegalArgumentException("El tamaño de descarga no puede ser negativo");
+        }
+
         this.tamanoDescarga = tamanoDescarga;
     }
 

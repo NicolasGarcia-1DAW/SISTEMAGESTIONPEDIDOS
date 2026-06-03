@@ -22,19 +22,22 @@ public class Tienda {
             throw new IllegalArgumentException("Cliente o pedido no pueden ser nulos");
         }
 
-        double totalProductos = pedido.calcularTotal();
+        if (cliente != pedido.getCliente()) {
+            throw new IllegalArgumentException("El cliente de la venta no coincide con el cliente del pedido");
+        }
+
+        double totalNeto = pedido.calcularTotal();
         double totalEnvio = calcularEnvio(pedido, cliente);
+        double totalIva = calcularIva(pedido);
 
-        double subtotal = totalProductos + totalEnvio;
+        double subtotal = totalNeto + totalEnvio + totalIva;
 
-        double descuento = cliente.calcularDescuentoFidelidad();
-        double totalDescuento = subtotal * descuento;
+        double porcentajeDescuento = cliente.calcularDescuentoFidelidad();
+        double descuento = subtotal * porcentajeDescuento;
 
-        double totalFinal = subtotal - totalDescuento;
+        double totalFinal = subtotal - descuento;
 
-        double totalIva = totalProductos * 0.21; // simplificado (válido para práctica)
-
-        return new Factura(subtotal, totalIva, totalEnvio, totalFinal);
+        return new Factura(totalNeto, totalIva, totalEnvio, descuento, totalFinal);
     }
 
     /**
@@ -48,15 +51,29 @@ public class Tienda {
 
         double totalEnvio = 0;
 
-        for (Producto p : pedido.getProductos()) {
+        for (Producto producto : pedido.getProductos()) {
 
-            if (p instanceof ProductoFisico) {
-                ProductoFisico pf = (ProductoFisico) p;
-                totalEnvio += pf.calcularCosteEnvio(cliente.getPais());
+            if (producto instanceof ProductoFisico) {
+
+                ProductoFisico pf = (ProductoFisico) producto;
+
+                int cantidad = pedido.getCantidades().get(producto.getId());
+
+                totalEnvio += pf.calcularCosteEnvio(cliente.getPais()) * cantidad;
             }
         }
 
         return totalEnvio;
     }
 
+    /**
+     * Obtiene el IVA total generado por los productos digitales
+     * del pedido utilizando el tipo de IVA general.
+     *
+     * @param pedido pedido a procesar
+     * @return importe total del IVA de los productos digitales
+     */
+    private double calcularIva(Pedido pedido) {
+        return pedido.calcularIva("GENERAL");
+    }
 }

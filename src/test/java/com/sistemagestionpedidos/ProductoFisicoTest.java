@@ -10,7 +10,7 @@ public class ProductoFisicoTest {
     @Test
     void calcularPrecioFinalProductoFisico() {
 
-        ProductoFisico producto = new ProductoFisico("1", "Teclado", 50.0, 5.0);
+        ProductoFisico producto = new ProductoFisico(1, "Teclado", 50.0, 5.0);
 
         double resultado = producto.calcularPrecioFinal();
 

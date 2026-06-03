@@ -4,7 +4,7 @@ public class ProductoFisico extends Producto {
 
     private double peso;
 
-    public ProductoFisico(String id, String nombre, double precioBase, double peso) {
+    public ProductoFisico(int id, String nombre, double precioBase, double peso) {
         super(id, nombre, precioBase);
 
         if (peso < 0) {

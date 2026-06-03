@@ -10,6 +10,6 @@ public class ProductoFisicoExceptionTest {
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new ProductoFisico("1", "Teclado", 50, -5));
+                () -> new ProductoFisico(1, "Teclado", 50, -5));
     }
 }

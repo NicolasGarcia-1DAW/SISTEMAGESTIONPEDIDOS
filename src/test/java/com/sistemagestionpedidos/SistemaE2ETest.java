@@ -9,13 +9,13 @@ public class SistemaE2ETest {
     @Test
     void flujoCompletoCompraHastaFactura() {
 
-        Cliente cliente = new Cliente("JR-1", "Juan Rodriguez", 5, true, "España");
+        Cliente cliente = new Cliente(1, "Juan Rodriguez", 5, true, "España");
 
-        Pedido pedido = new Pedido("P1", cliente);
+        Pedido pedido = new Pedido(1, cliente);
 
-        pedido.agregarProducto(new ProductoFisico("1", "Teclado", 50, 2));
+        pedido.agregarProducto(new ProductoFisico(1, "Teclado", 50, 2), 1);
 
-        pedido.agregarProducto(new ProductoDigital("2", "Curso", 30, 500));
+        pedido.agregarProducto(new ProductoDigital(2, "Curso", 30, 500), 2);
 
         Tienda tienda = new Tienda();
 

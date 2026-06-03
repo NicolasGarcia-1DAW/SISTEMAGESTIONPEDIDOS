@@ -8,9 +8,9 @@ public class RobustezTest {
     @Test
     void pedidoSinProductosDebeLanzarExcepcion() {
 
-        Cliente cliente = new Cliente("JR-1", "Juan Rodriguez", 3, true, "España");
+        Cliente cliente = new Cliente(1, "Juan Rodriguez", 3, true, "España");
 
-        Pedido pedido = new Pedido("P1", cliente);
+        Pedido pedido = new Pedido(1, cliente);
 
         assertThrows(IllegalStateException.class, pedido::calcularTotal);
     }
@@ -18,6 +18,6 @@ public class RobustezTest {
     @Test
     void clienteConNombreVacioDebeLanzarExcepcion() {
 
-        assertThrows(IllegalArgumentException.class, () -> new Cliente("1", "", 2, false, "España"));
+        assertThrows(IllegalArgumentException.class, () -> new Cliente(1, "", 2, false, "España"));
     }
 }

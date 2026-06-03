@@ -10,7 +10,7 @@ public class ProductoDigitalTest {
     @Test
     void calcularPrecioFinalProductoDigital() {
 
-        ProductoDigital producto = new ProductoDigital("2","Curso", 30.0, 500);
+        ProductoDigital producto = new ProductoDigital(2,"Curso", 30.0, 500);
 
         double resultado = producto.calcularPrecioFinal();
 

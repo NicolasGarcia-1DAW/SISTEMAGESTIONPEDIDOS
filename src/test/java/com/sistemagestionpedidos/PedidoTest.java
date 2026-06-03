@@ -14,15 +14,15 @@ public class PedidoTest {
     })
     void calcularTotalPedido(double precioFisico, double peso, double precioDigital, double totalEsperado) {
 
-        Cliente cliente = new Cliente("JR-1", "Juan Rodriguez", 3, true, "España");
+        Cliente cliente = new Cliente(1, "Juan Rodriguez", 3, true, "España");
 
-        Pedido pedido = new Pedido("P1|JR-1", cliente);
+        Pedido pedido = new Pedido(1, cliente);
 
-        ProductoFisico p1 = new ProductoFisico("1","Teclado", precioFisico, peso);
-        ProductoDigital p2 = new ProductoDigital("2","Curso", precioDigital, 500);
+        ProductoFisico p1 = new ProductoFisico(1,"Teclado", precioFisico, peso);
+        ProductoDigital p2 = new ProductoDigital(2,"Curso", precioDigital, 500);
 
-        pedido.agregarProducto(p1);
-        pedido.agregarProducto(p2);
+        pedido.agregarProducto(p1, 1);
+        pedido.agregarProducto(p2, 1);
 
         double total = pedido.calcularTotal();
 

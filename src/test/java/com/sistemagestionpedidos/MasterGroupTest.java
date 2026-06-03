@@ -173,9 +173,9 @@ public class MasterGroupTest {
 				"El pedido creado con colecciones deberia conservar el cliente indicado");
 		assertEquals(2, pedido.getProductos().size(),
 				"El pedido creado con colecciones deberia incluir todos los productos recibidos");
-		assertEquals(null, pedido.getCantidades().get(productoFisico.getId()),
+		assertEquals(2, pedido.getCantidades().get(productoFisico.getId()),
 				"La cantidad del producto fisico deberia inicializarse correctamente");
-		assertEquals(null, pedido.getCantidades().get(productoDigital.getId()),
+		assertEquals(1, pedido.getCantidades().get(productoDigital.getId()),
 				"La cantidad del producto digital deberia inicializarse correctamente");
 	}
 
@@ -245,7 +245,7 @@ public class MasterGroupTest {
 		Pedido pedido = new Pedido(154, cliente, productos, cantidades);
 		cantidades.put(producto1.getId(), 99);
 
-		assertEquals(null, pedido.getCantidades().get(producto1.getId()),
+		assertEquals(1, pedido.getCantidades().get(producto1.getId()),
 				"El pedido no deberia reflejar cambios externos en el mapa de cantidades usado para construirlo");
 	}
 

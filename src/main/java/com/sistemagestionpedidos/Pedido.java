@@ -17,12 +17,13 @@ public class Pedido {
      *
      * Aunque el enunciado indica usar el id del producto como clave,
      * el test "testCambiarIdDeProductoNoDeberiaRomperPedido" modifica el id
-     * de un producto después de añadirlo al pedido.
+     * de un producto después de añadirlo al pedido. Asi que, si usáramos el id como clave
+     * del mapa, el pedido se rompería porque la clave cambiaría.
      *
-     * Si usamos el id como clave, el pedido se rompe porque cambia la clave del Map.
-     *
-     * SOLUCIÓN: usar el objeto Producto como clave para mantener la identidad del producto
-     * independientemente de cambios en su id.
+     * SOLUCIÓN: usar el objeto Producto como clave internamente para mantener
+     * la identidad del producto independientemente de cambios en su id.
+     * El getter público getCantidades() expone Map<Integer, Integer> para
+     * compatibilidad con los tests que acceden por id.
      */
     private Map<Producto, Integer> cantidades;
 
@@ -102,17 +103,31 @@ public class Pedido {
     }
 
     /**
-     * También se devuelve copia defensiva del Map para evitar manipulación externa.
+     * Devuelve una copia defensiva del mapa de cantidades con el ID del producto
+     * como clave (Map<Integer, Integer>), para que los tests puedan acceder
+     * por id sin acoplarse al objeto Producto.
+     *
+     * El mapa interno sigue usando Producto como clave para garantizar que
+     * cambios en el id del producto no rompan los cálculos del pedido.
      */
-    public Map<Producto, Integer> getCantidades() {
-        return new HashMap<>(cantidades);
+    public Map<Integer, Integer> getCantidades() {
+        Map<Integer, Integer> resultado = new HashMap<>();
+
+        for (Map.Entry<Producto, Integer> entry : cantidades.entrySet()) {
+            resultado.put(entry.getKey().getId(), entry.getValue());
+        }
+
+        return resultado;
     }
-
+ 
+    /**
+     * Permite reemplazar el mapa de cantidades completo.
+     * Recibe Map<Producto, Integer> internamente para mantener coherencia.
+     */
     public void setCantidades(Map<Producto, Integer> cantidades) {
-
         // Copia defensiva del mapa recibido
         this.cantidades = new HashMap<>();
-
+        
         for (Map.Entry<Producto, Integer> entry : cantidades.entrySet()) {
             this.cantidades.put(entry.getKey(), entry.getValue());
         }

@@ -3,6 +3,10 @@ package com.sistemagestionpedidos;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Protege las validaciones de entrada del sistema y el
+ * lanzamiento de excepciones ante datos inválidos.
+ */
 public class RobustezTest {
 
     @Test

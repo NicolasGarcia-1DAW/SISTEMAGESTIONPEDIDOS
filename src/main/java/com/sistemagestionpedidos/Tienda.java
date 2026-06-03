@@ -52,7 +52,6 @@ public class Tienda {
      * @return coste total de envío
      */
     private double calcularEnvio(Pedido pedido, Cliente cliente) {
-
         double totalEnvio = 0;
 
         for (Producto producto : pedido.getProductos()) {
@@ -61,12 +60,15 @@ public class Tienda {
 
                 ProductoFisico pf = (ProductoFisico) producto;
 
-                int cantidad = pedido.getCantidades().get(producto);
+                // Se usa getId() porque getCantidades() ahora devuelve Map<Integer, Integer>
+                Integer cantidad = pedido.getCantidades().get(producto.getId());
 
+                if (cantidad == null) {
+                    cantidad = 0;
+                }
                 totalEnvio += pf.calcularCosteEnvio(cliente.getPais()) * cantidad;
             }
         }
-
         return totalEnvio;
     }
 

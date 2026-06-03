@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Protege el cálculo del precio final de productos digitales
+ * asegurando la correcta aplicación del IVA general.
+ */
 public class ProductoDigitalTest {
 
     @Test

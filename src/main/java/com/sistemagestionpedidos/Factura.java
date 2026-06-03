@@ -89,7 +89,7 @@ public class Factura {
     }
 
     public double getTotalIva() {
-        return totalIva;
+        return Math.round(totalIva * 100.0) / 100.0;
     }
 
     public void setTotalIva(double totalIva) {
@@ -113,7 +113,7 @@ public class Factura {
     }
 
     public double getDescuento() {
-        return descuento;
+        return Math.round(descuento * 100.0) / 100.0;
     }
 
     public void setDescuento(double descuento) {

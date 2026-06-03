@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+/*
+ * Protege el cálculo del total del pedido para combinaciones
+ * de productos físicos y digitales con distintos importes.
+ */
 public class PedidoTest {
 
     @ParameterizedTest

@@ -12,7 +12,7 @@ public class RobustezTest {
 
         Pedido pedido = new Pedido(1, cliente);
 
-        assertThrows(IllegalStateException.class, pedido::calcularTotal);
+        assertThrows(IllegalArgumentException.class, pedido::calcularTotal);
     }
 
     @Test

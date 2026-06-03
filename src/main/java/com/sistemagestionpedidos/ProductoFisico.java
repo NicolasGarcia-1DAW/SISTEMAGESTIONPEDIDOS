@@ -29,18 +29,18 @@ public class ProductoFisico extends Producto {
 
     public double calcularCosteEnvio(String pais) {
 
-        if (pais.equalsIgnoreCase("España")) {
-            return 0;
-        }
+        double costeDestino = 0;
 
-        if (pais.equalsIgnoreCase("Francia")
+        if (pais.equalsIgnoreCase("España")) {
+            costeDestino = 0;
+        } else if (pais.equalsIgnoreCase("Francia")
                 || pais.equalsIgnoreCase("Italia")
                 || pais.equalsIgnoreCase("Portugal")) {
 
-            return 5;
-        }
+            costeDestino = 5;
+        } else costeDestino = 10;
 
-        return 10;
+        return costeDestino + peso;
     }
 
     @Override

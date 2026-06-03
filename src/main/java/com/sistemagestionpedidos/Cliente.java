@@ -22,10 +22,6 @@ public class Cliente {
             throw new IllegalArgumentException("Los años de antiguedad no pueden ser negativos");
         }
 
-        if (pais == null || pais.isBlank()) {
-            throw new IllegalArgumentException("El pais no puede estar vacio");
-        }
-
         this.id = id;
         this.nombre = nombre;
         this.anosAntiguedad = anosAntiguedad;

@@ -26,6 +26,10 @@ public class Tienda {
             throw new IllegalArgumentException("El cliente de la venta no coincide con el cliente del pedido");
         }
 
+        if (cliente.getPais() == null || cliente.getPais().isBlank()) {
+            throw new IllegalArgumentException("El cliente de la venta no puede tener vacio su pais");
+        }
+
         double totalNeto = pedido.calcularTotal();
         double totalEnvio = calcularEnvio(pedido, cliente);
         double totalIva = calcularIva(pedido);
@@ -57,7 +61,7 @@ public class Tienda {
 
                 ProductoFisico pf = (ProductoFisico) producto;
 
-                int cantidad = pedido.getCantidades().get(producto.getId());
+                int cantidad = pedido.getCantidades().get(producto);
 
                 totalEnvio += pf.calcularCosteEnvio(cliente.getPais()) * cantidad;
             }

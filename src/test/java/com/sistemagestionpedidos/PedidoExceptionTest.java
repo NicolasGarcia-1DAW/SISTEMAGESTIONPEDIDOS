@@ -14,7 +14,7 @@ public class PedidoExceptionTest {
 
         Pedido pedido = new Pedido(1, cliente);
 
-        Exception exception = assertThrows(IllegalStateException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             pedido.calcularTotal();
         });
 

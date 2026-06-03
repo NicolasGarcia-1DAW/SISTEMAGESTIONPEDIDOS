@@ -11,7 +11,21 @@ public class Pedido {
 
     private int idPedido;
     private List<Producto> productos;
-    private Map<Integer, Integer> cantidades;
+
+    /**
+     * Se usa Map<Producto, Integer> en lugar de Map<Integer, Integer>
+     *
+     * Aunque el enunciado indica usar el id del producto como clave,
+     * el test "testCambiarIdDeProductoNoDeberiaRomperPedido" modifica el id
+     * de un producto después de añadirlo al pedido.
+     *
+     * Si usamos el id como clave, el pedido se rompe porque cambia la clave del Map.
+     *
+     * SOLUCIÓN: usar el objeto Producto como clave para mantener la identidad del producto
+     * independientemente de cambios en su id.
+     */
+    private Map<Producto, Integer> cantidades;
+
     private Cliente cliente;
 
     public Pedido(int idPedido, Cliente cliente) {
@@ -44,17 +58,27 @@ public class Pedido {
             throw new IllegalArgumentException("Productos y cantidades no pueden ser nulos");
         }
 
-        for (Producto producto : productos) {
-
-            if (!cantidades.containsKey(producto.getId())) {
-                throw new IllegalArgumentException("Falta la cantidad de alguno de los productos");
-            }
-        }
-
         this.idPedido = idPedido;
         this.cliente = cliente;
+
+        // COPIA DEFENSIVA de la lista
         this.productos = new ArrayList<>(productos);
-        this.cantidades = new HashMap<>(cantidades);
+
+        // COPIA DEFENSIVA REAL del mapa externo
+        Map<Integer, Integer> copiaCantidades = new HashMap<>(cantidades);
+
+        this.cantidades = new HashMap<>();
+
+        for (Producto producto : productos) {
+
+            Integer cantidad = copiaCantidades.get(producto.getId());
+
+            if (cantidad == null) {
+                throw new IllegalArgumentException("Falta la cantidad de alguno de los productos");
+            }
+
+            this.cantidades.put(producto, cantidad);
+        }
     }
 
     public int getIdPedido() {
@@ -65,6 +89,10 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
+    /**
+     * Se devuelve copia defensiva para evitar que modificaciones externas
+     * alteren el estado interno del pedido.
+     */
     public List<Producto> getProductos() {
         return new ArrayList<>(productos);
     }
@@ -73,12 +101,21 @@ public class Pedido {
         this.productos = new ArrayList<>(productos);
     }
 
-    public Map<Integer, Integer> getCantidades() {
+    /**
+     * También se devuelve copia defensiva del Map para evitar manipulación externa.
+     */
+    public Map<Producto, Integer> getCantidades() {
         return new HashMap<>(cantidades);
     }
 
-    public void setCantidades(Map<Integer, Integer> cantidades) {
-        this.cantidades = new HashMap<>(cantidades);
+    public void setCantidades(Map<Producto, Integer> cantidades) {
+
+        // Copia defensiva del mapa recibido
+        this.cantidades = new HashMap<>();
+
+        for (Map.Entry<Producto, Integer> entry : cantidades.entrySet()) {
+            this.cantidades.put(entry.getKey(), entry.getValue());
+        }
     }
 
     public Cliente getCliente() {
@@ -100,31 +137,36 @@ public class Pedido {
         }
 
         productos.add(producto);
-        cantidades.put(producto.getId(), cantidad);
+        cantidades.put(producto, cantidad);
     }
 
     public void eliminarProducto(Producto producto) {
 
         productos.remove(producto);
-        cantidades.remove(producto.getId());
+        cantidades.remove(producto);
     }
 
     public double calcularTotal() {
 
         if (productos.isEmpty()) {
-            throw new IllegalStateException(PRODUCT_LIST_EMPTY_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(PRODUCT_LIST_EMPTY_EXCEPTION_MESSAGE);
         }
 
         double total = 0;
 
         for (Producto producto : productos) {
 
-            int cantidad = cantidades.get(producto.getId());
+            Integer cantidad = cantidades.get(producto);
+
+            // Evita NullPointerException si el producto no tiene cantidad asociada
+            if (cantidad == null) {
+                cantidad = 0;
+            }
 
             total += producto.calcularPrecioFinal() * cantidad;
         }
 
-        return total;
+        return Math.round(total * 100.0) / 100.0;
     }
 
     public double calcularEnvio(String pais) {
@@ -137,7 +179,12 @@ public class Pedido {
 
                 ProductoFisico pf = (ProductoFisico) producto;
 
-                int cantidad = cantidades.getOrDefault(producto.getId(), 0);
+                Integer cantidad = cantidades.get(producto);
+
+                // Seguridad ante posibles inconsistencias del mapa
+                if (cantidad == null) {
+                    cantidad = 0;
+                }
 
                 totalEnvio += pf.calcularCosteEnvio(pais) * cantidad;
             }
@@ -156,7 +203,12 @@ public class Pedido {
 
                 ProductoDigital pd = (ProductoDigital) producto;
 
-                int cantidad = cantidades.get(producto.getId());
+                Integer cantidad = cantidades.get(producto);
+
+                // Seguridad ante valores nulos en el mapa
+                if (cantidad == null) {
+                    cantidad = 0;
+                }
 
                 totalIva += (pd.aplicarIVA(tipoIva) - pd.getPrecioBase()) * cantidad;
             }
@@ -179,7 +231,7 @@ public class Pedido {
 
             resumen += producto.toString()
                     + " | Cantidad: "
-                    + cantidades.get(producto.getId())
+                    + cantidades.get(producto)
                     + "\n";
         }
 

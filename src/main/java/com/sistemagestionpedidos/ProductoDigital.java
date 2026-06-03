@@ -32,13 +32,13 @@ public class ProductoDigital extends Producto {
         switch (tipoIva.toUpperCase()) {
 
             case "GENERAL":
-                return getPrecioBase() * 1.21;
+                return Math.round(getPrecioBase() * 1.21 * 100.0) / 100.0;
 
             case "REDUCIDO":
-                return getPrecioBase() * 1.10;
+                return Math.round(getPrecioBase() * 1.10 * 100.0) / 100.0;
 
             case "SUPER":
-                return getPrecioBase() * 1.04;
+                return Math.round(getPrecioBase() * 1.04 * 100.0) / 100.0;
 
             default:
                 throw new IllegalArgumentException("Tipo de IVA no válido");

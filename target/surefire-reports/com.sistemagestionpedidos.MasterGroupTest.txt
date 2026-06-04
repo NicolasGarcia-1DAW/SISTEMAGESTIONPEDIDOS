@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.sistemagestionpedidos.MasterGroupTest
 -------------------------------------------------------------------------------
-Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.222 s -- in com.sistemagestionpedidos.MasterGroupTest
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.219 s -- in com.sistemagestionpedidos.MasterGroupTest

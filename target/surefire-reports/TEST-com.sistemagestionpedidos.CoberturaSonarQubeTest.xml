@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.sistemagestionpedidos.PedidoProductoIntegrationTest" time="0.002" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.sistemagestionpedidos.CoberturaSonarQubeTest" time="0.139" tests="41" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -60,5 +60,45 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="deberiaCalcularTotalCorrectamente" classname="Tests de Integracion" time="0.0"/>
+  <testcase name="pedidoConstructorColeccionesNulas" classname="Suite de Cobertura Complementaria" time="0.022"/>
+  <testcase name="productoSetPrecioNegativo" classname="Suite de Cobertura Complementaria" time="0.006"/>
+  <testcase name="pedidoSetters" classname="Suite de Cobertura Complementaria" time="0.002"/>
+  <testcase name="clienteDescuentoCero" classname="Suite de Cobertura Complementaria" time="0.002"/>
+  <testcase name="pedidoMostrarResumen" classname="Suite de Cobertura Complementaria" time="0.006"/>
+  <testcase name="facturaConstructorValido" classname="Suite de Cobertura Complementaria" time="0.01"/>
+  <testcase name="productoFisicoGetPeso" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoDigitalIvaInvalido" classname="Suite de Cobertura Complementaria" time="0.002"/>
+  <testcase name="productoDigitalSetTamanoNegativo" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="facturaCodigoAutogenerado" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="clienteDescuentoAntiguedadMedia" classname="Suite de Cobertura Complementaria" time="0.002"/>
+  <testcase name="clienteDescuentoVipSinAntiguedad" classname="Suite de Cobertura Complementaria" time="0.002"/>
+  <testcase name="pedidoEliminarProducto" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="pedidoSetCantidades" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="tiendaPedidoNulo" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoFisicoSetPesoNegativo" classname="Suite de Cobertura Complementaria" time="0.002"/>
+  <testcase name="productoFisicoToString" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="tiendaVentaMixta" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoSetIdInvalido" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoConstructorIdInvalido" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="tiendaClienteNulo" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoBasePrecioFinal" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoDigitalGetTamano" classname="Suite de Cobertura Complementaria" time="0.002"/>
+  <testcase name="facturaConstructorTotalNegativo" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="clienteSetIdInvalido" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="clienteConstructorAnosNegativos" classname="Suite de Cobertura Complementaria" time="0.002"/>
+  <testcase name="productoFisicoEnvioEspana" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoConstructorNombreInvalido" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="pedidoAgregarProductoNulo" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="clienteDescuentoSoloAntiguedad" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="tiendaVentaEnvioInternacional" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoFisicoEnvioZonaMedia" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoSetNombreInvalido" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoFisicoEnvioInternacional" classname="Suite de Cobertura Complementaria" time="0.0"/>
+  <testcase name="pedidoConstructorIdInvalido" classname="Suite de Cobertura Complementaria" time="0.0"/>
+  <testcase name="pedidoAgregarCantidadInvalida" classname="Suite de Cobertura Complementaria" time="0.0"/>
+  <testcase name="clienteGettersSetters" classname="Suite de Cobertura Complementaria" time="0.0"/>
+  <testcase name="clienteConstructorIdInvalido" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="pedidoConstructorClienteNulo" classname="Suite de Cobertura Complementaria" time="0.001"/>
+  <testcase name="productoToString" classname="Suite de Cobertura Complementaria" time="0.0"/>
+  <testcase name="productoDigitalToString" classname="Suite de Cobertura Complementaria" time="0.001"/>
 </testsuite>
